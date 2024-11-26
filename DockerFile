@@ -13,7 +13,7 @@ COPY requirements.txt /app/requirements.txt
 # Install Python dependencies
 RUN pip install -r requirements.txt
 
-# Environment variables (optional placeholders for testing locally)
+# Environment variables
 ENV S3_BUCKET=s3-to-rds-bucket-jarvis 
 ENV S3_KEY=database.csv
 ENV RDS_HOST=terraform-20241124065435848200000001.cvwgs6g8gke4.us-east-1.rds.amazonaws.com
