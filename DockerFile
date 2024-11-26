@@ -1,0 +1,25 @@
+FROM python:3.9-slim
+
+# Install dependencies
+RUN apt-get update && apt-get install -y default-libmysqlclient-dev gcc
+
+# Set up working directory
+WORKDIR /app
+
+# Copy files
+COPY app.py /app/app.py
+COPY requirements.txt /app/requirements.txt
+
+# Install Python dependencies
+RUN pip install -r requirements.txt
+
+# Environment variables (optional placeholders for testing locally)
+ENV S3_BUCKET=s3-to-rds-bucket-jarvis 
+ENV S3_KEY=database.csv
+ENV RDS_HOST=terraform-20241124065435848200000001.cvwgs6g8gke4.us-east-1.rds.amazonaws.com
+ENV RDS_USER=admin
+ENV RDS_PASSWORD=admin123
+ENV RDS_DB=profession_db
+
+# Set entry point
+ENTRYPOINT ["python", "app.py"]
